@@ -1,16 +1,19 @@
+import 'dart:ffi';
+
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
-import 'package:studentmanegement/presentation/provider/classroom_provider.dart';
-import 'package:studentmanegement/presentation/screens/classroom_details.dart';
+import 'package:studentmanegement/presentation/provider/subject_provider.dart';
 
 import '../../core/error_handler.dart';
+import "package:http/http.dart" as http;
 
-class Classrooms extends StatelessWidget {
-  const Classrooms({super.key});
+class AddSubject extends StatelessWidget {
+  final int? id;
+  const AddSubject({super.key, required this.id});
 
 @override
   Widget build(BuildContext context) {
-    return  Scaffold(body: Consumer<ClassroomProvider>(
+    return  Scaffold(body: Consumer<SubjectProvider>(
       builder: (context, state, _) {
         
  if (state.homeFailure != null &&
@@ -21,7 +24,7 @@ class Classrooms extends StatelessWidget {
           if (state.isLoading) {
             return const Center(child: CircularProgressIndicator.adaptive());
           }
-          if (state.classroom != null && state.classroom!.classrooms.isNotEmpty) {
+          if (state.subjects != null && state.subjects!.subjects.isNotEmpty) {
            return
         SingleChildScrollView(
           child: Column(
@@ -29,28 +32,27 @@ class Classrooms extends StatelessWidget {
             mainAxisAlignment: MainAxisAlignment.start,
             children: [
               SizedBox(height: 40,),
-              Text("ClassRoom"),
               SizedBox(height: MediaQuery.of(context).size.height,
                 child: ListView.builder(
             
-                  itemCount: state.classroom?.classrooms.length,
+                  itemCount: state.subjects?.subjects.length,
                   itemBuilder: (context, index) {
                     return  Padding(
                       padding: const EdgeInsets.only(bottom: 20),
                       child: GestureDetector(
-                        onTap: () {
-                            Navigator.push(
-                          context,
-                          MaterialPageRoute(
-                              builder: (context) =>  ClassroomDetails(name:state.classroom?.classrooms[index].name,layout:state.classroom?.classrooms[index].layout.toString(),size:state.classroom?.classrooms[index].size,studentId:state.classroom?.classrooms[index].id)),
-                        );
-                          
+                        onTap: ()async {
+fetch(id,state.subjects!.subjects[index].id);
                         },
                         child: Container
                         (color: Colors.green,height: 100,
                         margin: EdgeInsets.only(bottom: 6),
                           
-                          child: Center(child: Text(state.classroom?.classrooms[index].name??"0"))),
+                          child: Center(child: Row(
+                            children: [
+                              Text(state.subjects?.subjects[index].name??"0"),
+                                Text("${state.subjects?.subjects[index].id}"),
+                            ],
+                          ))),
                       ),
                     );
                   
@@ -65,8 +67,22 @@ class Classrooms extends StatelessWidget {
         
 
         return
-         Center(child: Text(state.classroom?.classrooms[0].name??"0"),);
+         Center(child: Text(state.subjects?.subjects[0].name??"0"),);
       }
     ),);
+  }
+  fetch(int? id, int subjectid)async{
+    print("sudentid:${id}=====");
+        print("subject:${subjectid}=====");
+        try {
+ final Map<String, dynamic> body = {
+    'subject': subjectid.toString(),
+  };
+      final response = await http.patch(Uri.parse('https://nibrahim.pythonanywhere.com/classrooms/${id}?api_key=42efb'),body: body);
+ print(response.body);
+ print(response.statusCode);
+    } catch (e) {
+    print(e);
+    }
   }
 }

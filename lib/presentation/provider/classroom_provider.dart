@@ -42,7 +42,7 @@ ClassroomModel? classroom;
       setFailure = error;
       setLoading = false;
     }, (data) {
-      log(data.classrooms.toString());
+    ///  log(data.classrooms.toString());
      classroom = data;
     //  print(students?.toJson())
 ;      notifyListeners();

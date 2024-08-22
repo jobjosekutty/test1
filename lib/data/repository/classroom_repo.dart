@@ -10,7 +10,7 @@ import '../models/classroom_model.dart';
 import '../models/student_model.dart';
 
 abstract class ClassroomRepo {
-  Future<Either<Failure, ClassroomModel>> getClassroom();
+  Future<Either<Failure, ClassroomModel>>  getClassroom();
 }
 @LazySingleton(as: ClassroomRepo)
 class ClassroomRepoImpl extends ClassroomRepo {
@@ -23,6 +23,8 @@ class ClassroomRepoImpl extends ClassroomRepo {
       final response = await http.get(Uri.parse('https://nibrahim.pythonanywhere.com/classrooms/?api_key=42efb'));
       if (response.statusCode == 200) { 
        final data = classroomModelFromJson(response.body);
+       print("CLASSROOMS");
+       log(response.body);
       
        return Right(data);
       } else {

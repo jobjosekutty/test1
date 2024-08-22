@@ -10,7 +10,8 @@ class SubjectDetails extends StatelessWidget {
   Widget build(BuildContext context) {
     return  Scaffold(body: Center(
       child: Column(
-        mainAxisAlignment: MainAxisAlignment.center,
+         crossAxisAlignment: CrossAxisAlignment.center,
+            mainAxisAlignment: MainAxisAlignment.start,
         children: [
           Text(name.toString()),
               Text(teacher.toString()),

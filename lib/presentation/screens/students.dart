@@ -2,8 +2,10 @@ import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:studentmanegement/presentation/screens/student_details.dart';
 
+import '../../core/app_constants.dart';
 import '../../core/error_handler.dart';
 import '../provider/student_provider.dart';
+import '../widgets/snack_bar.dart';
 
 class Students extends StatefulWidget {
   const Students({super.key});
@@ -33,6 +35,17 @@ class _StudentsState extends State<Students> {
  if (state.homeFailure != null &&
               state.homeFailure is NetworkFailure) {
             return const Center(child: Text("No Internet"));
+          }
+
+          if(state.homeFailure is ServerFailure){
+            
+                     scaffoldMessengerKey.currentState?.showSnackBar(
+                appSnackBar(
+                  "Server Failure",
+                  Colors.red,
+                ),
+              );
+
           }
      
           if (state.isLoading) {

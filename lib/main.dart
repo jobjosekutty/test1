@@ -3,6 +3,7 @@ import 'package:provider/provider.dart';
 import 'package:studentmanegement/presentation/provider/classroom_provider.dart';
 import 'package:studentmanegement/presentation/provider/student_provider.dart';
 
+import 'core/app_constants.dart';
 import 'di/get_it.dart';
 import 'presentation/provider/subject_provider.dart';
 import 'presentation/screens/home.dart';
@@ -30,6 +31,7 @@ class MyApp extends StatelessWidget {
             
       ],
       child: MaterialApp(
+                scaffoldMessengerKey: scaffoldMessengerKey,
         title: 'Flutter Demo',
         theme: ThemeData(
           colorScheme: ColorScheme.fromSeed(seedColor: Colors.deepPurple),
