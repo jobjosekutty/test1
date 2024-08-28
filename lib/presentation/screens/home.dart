@@ -4,6 +4,7 @@ import 'package:studentmanegement/data/models/classroom_model.dart';
 import 'package:studentmanegement/di/get_it.dart';
 import 'package:studentmanegement/presentation/provider/classroom_provider.dart';
 import 'package:studentmanegement/presentation/provider/student_provider.dart';
+import 'package:studentmanegement/presentation/screens/registration.dart';
 import 'package:studentmanegement/presentation/screens/students.dart';
 import 'package:studentmanegement/presentation/screens/subjects.dart';
 
@@ -121,15 +122,24 @@ onTap: () {
                             ],
                           )),
                     ),
-                    Container(
-                        color: Colors.yellow,
-                        child: const Column(
-                          mainAxisAlignment: MainAxisAlignment.center,
-                          children: [
-                            Icon(Icons.person),
-                            Text('Registration'),
-                          ],
-                        )),
+                    GestureDetector(
+                      onTap: () {
+                          Navigator.push(
+                          context,
+                          MaterialPageRoute(
+                              builder: (context) => RegistrationsScreen()),
+                        );
+                      },
+                      child: Container(
+                          color: Colors.yellow,
+                          child: const Column(
+                            mainAxisAlignment: MainAxisAlignment.center,
+                            children: [
+                              Icon(Icons.person),
+                              Text('Registration'),
+                            ],
+                          )),
+                    ),
                   ],
                 ),
               ),
