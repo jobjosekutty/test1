@@ -9,14 +9,16 @@ class SubjectDetails extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return  Scaffold(body: Center(
-      child: Column(
-         crossAxisAlignment: CrossAxisAlignment.center,
-            mainAxisAlignment: MainAxisAlignment.start,
-        children: [
-          Text(name.toString(),style: TextStyle(fontWeight:FontWeight.bold,)),
-              Text(teacher.toString(),style: TextStyle(fontWeight:FontWeight.bold)),
-                  Text(credit.toString(),style: TextStyle(fontWeight:FontWeight.bold))
-        ],
+      child: Center(
+        child: Column(
+          
+              mainAxisAlignment: MainAxisAlignment.center,
+          children: [
+            Text(name.toString(),style: TextStyle(fontWeight:FontWeight.bold,)),
+                Text(teacher.toString(),style: TextStyle(fontWeight:FontWeight.bold)),
+                    Text(credit.toString(),style: TextStyle(fontWeight:FontWeight.bold))
+          ],
+        ),
       ),
     ),);
   }

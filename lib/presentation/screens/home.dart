@@ -4,6 +4,7 @@ import 'package:studentmanegement/core/app_constants.dart';
 import 'package:studentmanegement/data/models/classroom_model.dart';
 import 'package:studentmanegement/di/get_it.dart';
 import 'package:studentmanegement/presentation/provider/classroom_provider.dart';
+import 'package:studentmanegement/presentation/provider/registration_provider.dart';
 import 'package:studentmanegement/presentation/provider/student_provider.dart';
 import 'package:studentmanegement/presentation/screens/registration.dart';
 import 'package:studentmanegement/presentation/screens/students.dart';
@@ -131,10 +132,18 @@ onTap: () {
                     ),
                     GestureDetector(
                       onTap: () {
+                        //   Navigator.push(
+                        //   context,
+                        //   MaterialPageRoute(
+                        //       builder: (context) => RegistrationsScreen()),
+                        // );
                           Navigator.push(
                           context,
                           MaterialPageRoute(
-                              builder: (context) => RegistrationsScreen()),
+                              builder: (context) => ChangeNotifierProvider(
+                                    create: (context) => getIt<RegistrationProvider>()..getRegistartion(),
+                                    child: const RegistrationsScreen(),
+                                  )),
                         );
                       },
                       child: Container(

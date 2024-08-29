@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:studentmanegement/presentation/provider/classroom_provider.dart';
+import 'package:studentmanegement/presentation/provider/registration_provider.dart';
 import 'package:studentmanegement/presentation/provider/student_provider.dart';
 
 import 'core/app_constants.dart';
@@ -27,6 +28,8 @@ class MyApp extends StatelessWidget {
             create: (context) => getIt<SubjectProvider>()),
               ChangeNotifierProvider(
             create: (context) => getIt<ClassroomProvider>()),
+             ChangeNotifierProvider(
+            create: (context) => getIt<RegistrationProvider>()),
           
             
       ],

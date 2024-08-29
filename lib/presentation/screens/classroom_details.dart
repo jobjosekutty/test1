@@ -63,9 +63,10 @@ String? teacher;
                 padding: EdgeInsets.all(16.0),
                 child:  Column(
                   children: [
-                                const Text("ClassRoom"),
+                    SizedBox(height: 40,),
+                               
               Text(name.toString()),
-               Text(layout.toString()),
+              
                   ],
                 ),
               ),
@@ -74,7 +75,7 @@ String? teacher;
                   padding: const EdgeInsets.all(16),
                   sliver: SliverToBoxAdapter(
                     child:    Container(
-                height: 100,
+               //  height: 100,
                 width: double.infinity,
                 decoration: BoxDecoration(
                   color: Colors.grey,
@@ -93,7 +94,7 @@ String? teacher;
                  subject ==null?         CupertinoButton(
                         child: Text("add"),
                         onPressed: () {
-                                  Navigator.push(
+                                  Navigator.pushReplacement(
                           context,
                           MaterialPageRoute(
                               builder: (context) => ChangeNotifierProvider(
@@ -105,7 +106,18 @@ String? teacher;
 
                         },
                         color: Colors.green,
-                      ):Container(height: 100,width: 50,child: Center(child: Text("Change")),)
+                      ):CupertinoButton(child: Center(child: Text("Change",style: TextStyle(color: AppColors.green),)),onPressed: () {
+                               Navigator.pushReplacement(
+                          context,
+                          MaterialPageRoute(
+                              builder: (context) => ChangeNotifierProvider(
+                                    create: (context) => getIt< SubjectProvider>()..getSubject(),
+                                    child: AddSubject(id:studentId),
+                                
+                                  )),
+                        );
+                        
+                      },)
                     ],
                   ),
                 ),
@@ -169,7 +181,7 @@ String? teacher;
                     sliver: SliverToBoxAdapter(
                       child: IntrinsicHeight(
                         child: 
-                                   subject!= null ? Container(height: 100,width: double.infinity,color: Colors.red,child: Center(child: Text("subject updated")),):Container(),
+                                   subject!= null ? Container(height: 50,width: double.infinity,color: Colors.grey,child: Center(child: Text("subject updated",style: TextStyle(color: Colors.green,fontWeight: FontWeight.bold,fontSize: 18),)),):Container(),
                       ),
                     ),
                   ),

@@ -10,7 +10,8 @@ class Subjects extends StatelessWidget {
 
  @override
   Widget build(BuildContext context) {
-    return  Scaffold(body: Consumer<SubjectProvider>(
+    return  Scaffold(appBar: AppBar(title: Text("Students"),centerTitle: true,),
+      body: Consumer<SubjectProvider>(
       builder: (context, state, _) {
         
  if (state.homeFailure != null &&
@@ -35,7 +36,7 @@ class Subjects extends StatelessWidget {
                   itemCount: state.subjects?.subjects.length,
                   itemBuilder: (context, index) {
                     return  Padding(
-                      padding: const EdgeInsets.only(bottom: 20),
+                      padding: const EdgeInsets.all(10),
                       child: GestureDetector(
                         onTap: () {
                             Navigator.push(
@@ -46,10 +47,35 @@ class Subjects extends StatelessWidget {
                           
                         },
                         child: Container
-                        (color: Colors.green,height: 100,
+                        
+                        (height: 100,
+                        decoration: BoxDecoration(borderRadius: BorderRadius.circular(10),color: Colors.grey,),
+                        
                         margin: EdgeInsets.only(bottom: 6),
+                        padding: EdgeInsets.all(10),
                           
-                          child: Center(child: Text(state.subjects?.subjects[index].name??"0"))),
+                          child: Row(
+                            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                            children: [
+                              Column(
+                                mainAxisAlignment: MainAxisAlignment.center,
+                                crossAxisAlignment: CrossAxisAlignment.start,
+                                children: [
+                                  Text(state.subjects?.subjects[index].name??"",style: TextStyle(fontWeight:FontWeight.bold)),
+                                    Text(state.subjects?.subjects[index].teacher??"",style: TextStyle(fontWeight:FontWeight.bold)),
+                                ],
+                              ),
+                              Column(
+                                mainAxisAlignment: MainAxisAlignment.center,
+                                crossAxisAlignment: CrossAxisAlignment.start,
+                                children: [
+                                  Text(state.subjects?.subjects[index].credits.toString()??"",style: TextStyle(fontWeight:FontWeight.bold)),
+                                  Text("Credit",style: TextStyle(fontWeight:FontWeight.bold))
+
+                                ],
+                              )
+                            ],
+                          )),
                       ),
                     );
                   
