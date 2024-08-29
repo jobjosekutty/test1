@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
+import 'package:studentmanegement/core/app_constants.dart';
 import 'package:studentmanegement/data/models/classroom_model.dart';
 import 'package:studentmanegement/di/get_it.dart';
 import 'package:studentmanegement/presentation/provider/classroom_provider.dart';
@@ -44,7 +45,7 @@ class Home extends StatelessWidget {
                       )
                     ],
                   ),
-                  IconButton(onPressed: () {}, icon: const Icon(Icons.handyman))
+                  IconButton(onPressed: () {}, icon: const Icon(Icons.menu))
                 ],
               ),
               const SizedBox(
@@ -68,12 +69,14 @@ class Home extends StatelessWidget {
                         );
                       },
                       child: Container(
-                          color: Colors.green[50],
+                          decoration: BoxDecoration(
+                           color: gridColors[0],
+                        borderRadius: BorderRadius.circular(10)),
                           child: const Column(
                             mainAxisAlignment: MainAxisAlignment.center,
                             children: [
-                              Icon(Icons.person),
-                              Text('Sudent'),
+                              Icon(Icons.school),
+                              Text('Student'),
                             ],
                           )),
                     ),
@@ -91,11 +94,13 @@ class Home extends StatelessWidget {
                        
                       },
                       child: Container(
-                          color: Colors.blue[50],
+                         decoration: BoxDecoration(
+                           color: gridColors[1],
+                        borderRadius: BorderRadius.circular(10)),
                           child: const Column(
                             mainAxisAlignment: MainAxisAlignment.center,
                             children: [
-                              Icon(Icons.person),
+                              Icon(Icons.import_contacts_outlined),
                               Text('Subject'),
                             ],
                           )),
@@ -113,11 +118,13 @@ onTap: () {
                                   )),
                         );
 },                      child: Container(
-                          color: Colors.green,
+                          decoration: BoxDecoration(
+                           color: gridColors[2],
+                        borderRadius: BorderRadius.circular(10)),
                           child: const Column(
                             mainAxisAlignment: MainAxisAlignment.center,
                             children: [
-                              Icon(Icons.person),
+                              Icon(Icons.meeting_room),
                               Text('Classroom'),
                             ],
                           )),
@@ -131,11 +138,13 @@ onTap: () {
                         );
                       },
                       child: Container(
-                          color: Colors.yellow,
+                       decoration: BoxDecoration(
+                           color: gridColors[3],
+                        borderRadius: BorderRadius.circular(10)),
                           child: const Column(
                             mainAxisAlignment: MainAxisAlignment.center,
                             children: [
-                              Icon(Icons.person),
+                              Icon(Icons.edit),
                               Text('Registration'),
                             ],
                           )),

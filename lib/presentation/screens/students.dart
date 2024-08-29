@@ -5,6 +5,7 @@ import 'package:studentmanegement/presentation/screens/student_details.dart';
 import '../../core/app_constants.dart';
 import '../../core/error_handler.dart';
 import '../provider/student_provider.dart';
+import '../widgets/common_app_bar.dart';
 import '../widgets/snack_bar.dart';
 
 class Students extends StatefulWidget {
@@ -29,7 +30,9 @@ class _StudentsState extends State<Students> {
   }
   @override
   Widget build(BuildContext context) {
-    return  Scaffold(body: Consumer<StudentProvider>(
+    return  Scaffold(
+      appBar: AppBar(title: Text("Students"),centerTitle: true,),
+      body: Consumer<StudentProvider>(
       builder: (context, state, _) {
         
  if (state.homeFailure != null &&
@@ -53,41 +56,68 @@ class _StudentsState extends State<Students> {
           }
           if (state.students != null && state.students!.students.isNotEmpty) {
            return
-        SingleChildScrollView(
-          child: Column(
-            crossAxisAlignment: CrossAxisAlignment.center,
-            mainAxisAlignment: MainAxisAlignment.start,
-            children: [
-              SizedBox(height: 40,),
-              SizedBox(height: MediaQuery.of(context).size.height,
-                child: ListView.builder(
+        Padding(
+          padding: const EdgeInsets.all(8.0),
+          child: SingleChildScrollView(
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.center,
+              mainAxisAlignment: MainAxisAlignment.start,
+              children: [
+                
+               // SizedBox(height: 40,),
+                SizedBox(height: MediaQuery.of(context).size.height,
+                  child: ListView.builder(
+              
+                    itemCount: state.students?.students.length,
+                    itemBuilder: (context, index) {
+                      return  Padding(
+                        padding: const EdgeInsets.only(bottom: 20),
+                        child: GestureDetector(
+                          onTap: () {
+                              Navigator.push(
+                            context,
+                            MaterialPageRoute(
+                                builder: (context) =>  StudentDetails(name:state.students?.students[index].name,age:state.students?.students[index].age.toString(),email:state.students?.students[index].email)),
+                          );
+                            
+                          },
+                          child: Container
+                          (height: 100,padding: EdgeInsets.all(10),
+                          margin: const EdgeInsets.only(bottom: 6),
+                          decoration: BoxDecoration(
+                            color: Colors.grey,
+                            borderRadius: BorderRadius.circular(10)
+                          ),
+                            
+                            child: Row(
+                              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                              children: [
+                                Column(
+                                  crossAxisAlignment: CrossAxisAlignment.start,
+                                  mainAxisAlignment: MainAxisAlignment.center,
+                                  children: [
+                                    Text(state.students?.students[index].name??"",style: TextStyle(fontWeight:FontWeight.bold),),
+                                     Text(state.students?.students[index].email??"",style: TextStyle(fontWeight:FontWeight.bold)),
+                                  ],
+                                ),
+                                  Row(
+                                    children: [
+                                       Text("Age:",style: TextStyle(fontWeight:FontWeight.bold)),
+
+                                      Text(state.students?.students[index].age.toString()??"",style: TextStyle(fontWeight:FontWeight.bold)),
+                                    ],
+                                  ),
+                              ],
+                            )),
+                        ),
+                      );
+                    
+                  },),
+                )
+              
             
-                  itemCount: state.students?.students.length,
-                  itemBuilder: (context, index) {
-                    return  Padding(
-                      padding: const EdgeInsets.only(bottom: 20),
-                      child: GestureDetector(
-                        onTap: () {
-                            Navigator.push(
-                          context,
-                          MaterialPageRoute(
-                              builder: (context) =>  StudentDetails(name:state.students?.students[index].name,age:state.students?.students[index].age.toString(),email:state.students?.students[index].email)),
-                        );
-                          
-                        },
-                        child: Container
-                        (color: Colors.green,height: 100,
-                        margin: EdgeInsets.only(bottom: 6),
-                          
-                          child: Center(child: Text(state.students?.students[index].name??"0"))),
-                      ),
-                    );
-                  
-                },),
-              )
-            
-          
-            ],
+              ],
+            ),
           ),
         );
           }

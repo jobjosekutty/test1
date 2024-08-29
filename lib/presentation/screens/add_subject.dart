@@ -1,8 +1,11 @@
+import 'dart:convert';
 import 'dart:ffi';
 
 import 'package:flutter/material.dart';
+import 'package:injectable/injectable.dart';
 import 'package:provider/provider.dart';
 import 'package:studentmanegement/presentation/provider/subject_provider.dart';
+import 'package:studentmanegement/presentation/screens/classroom_details.dart';
 
 import '../../core/error_handler.dart';
 import "package:http/http.dart" as http;
@@ -41,7 +44,7 @@ class AddSubject extends StatelessWidget {
                       padding: const EdgeInsets.only(bottom: 20),
                       child: GestureDetector(
                         onTap: ()async {
-fetch(id,state.subjects!.subjects[index].id);
+fetch(id,state.subjects!.subjects[index].id,context);
                         },
                         child: Container
                         (color: Colors.green,height: 100,
@@ -71,7 +74,8 @@ fetch(id,state.subjects!.subjects[index].id);
       }
     ),);
   }
-  fetch(int? id, int subjectid)async{
+  fetch(int? id, int subjectid,BuildContext context)async{
+      Map<String, dynamic>? responseData;
     print("sudentid:${id}=====");
         print("subject:${subjectid}=====");
         try {
@@ -80,7 +84,18 @@ fetch(id,state.subjects!.subjects[index].id);
   };
       final response = await http.patch(Uri.parse('https://nibrahim.pythonanywhere.com/classrooms/${id}?api_key=42efb'),body: body);
  print(response.body);
- print(response.statusCode);
+  responseData = json.decode(response.body);
+  int studentId = responseData?['id'];
+String layout = responseData?['layout'];
+String name = responseData?['name'];
+int size = responseData?['size'];
+int subjectId = responseData?['subject'];
+if(response.statusCode ==200){
+ Navigator.push(
+    context,
+    MaterialPageRoute(builder: (context) =>   ClassroomDetails(name:name,layout:layout,size:size,studentId:studentId,subject: subjectId,)),
+  );
+}
     } catch (e) {
     print(e);
     }

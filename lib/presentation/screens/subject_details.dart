@@ -13,9 +13,9 @@ class SubjectDetails extends StatelessWidget {
          crossAxisAlignment: CrossAxisAlignment.center,
             mainAxisAlignment: MainAxisAlignment.start,
         children: [
-          Text(name.toString()),
-              Text(teacher.toString()),
-                  Text(credit.toString())
+          Text(name.toString(),style: TextStyle(fontWeight:FontWeight.bold,)),
+              Text(teacher.toString(),style: TextStyle(fontWeight:FontWeight.bold)),
+                  Text(credit.toString(),style: TextStyle(fontWeight:FontWeight.bold))
         ],
       ),
     ),);

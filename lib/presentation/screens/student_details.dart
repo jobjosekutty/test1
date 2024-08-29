@@ -8,13 +8,15 @@ class StudentDetails extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return  Scaffold(body: Center(
+    return  Scaffold(
+      appBar: AppBar(title: Text("Student Details"),centerTitle: true,),
+      body: Center(
       child: Column(
         mainAxisAlignment: MainAxisAlignment.center,
         children: [
-          Text(name.toString()),
-              Text(age.toString()),
-                  Text(email.toString())
+          Text(name.toString(),style: TextStyle(fontWeight:FontWeight.bold)),
+              Text(age.toString(),style: TextStyle(fontWeight:FontWeight.bold)),
+                  Text(email.toString(),style: TextStyle(fontWeight:FontWeight.bold))
         ],
       ),
     ),);
